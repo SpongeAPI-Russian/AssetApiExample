@@ -38,21 +38,21 @@ public class AssetApiExample {
 
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
-        Optional<Asset> assetOpt = Sponge.getAssetManager().getAsset(this, "myfile.txt");
-        assetOpt.ifPresent(asset -> {
-            try {
-                asset.copyToDirectory(confDir);
-                logger.info("Файл распакован!");
-            } catch (IOException e) {
-                logger.error("Ошибка распаковки файла!", e);
-            }
-        });
-
         Optional<Asset> assetOpt1 = container.getAsset("bestdir/bestfile.txt");
         assetOpt1.ifPresent(asset -> {
             try {
                 asset.copyToDirectory(confDir.resolve("bestdir"));
                 logger.info("Файл распакован");
+            } catch (IOException e) {
+                logger.error("Ошибка распаковки файла!", e);
+            }
+        });
+
+        Optional<Asset> assetOpt = Sponge.getAssetManager().getAsset(this, "myfile.txt");
+        assetOpt.ifPresent(asset -> {
+            try {
+                asset.copyToDirectory(confDir);
+                logger.info("Файл распакован!");
             } catch (IOException e) {
                 logger.error("Ошибка распаковки файла!", e);
             }
